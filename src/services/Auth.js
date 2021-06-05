@@ -6,7 +6,7 @@ class Auth {
     }
 
     async login(user) {
-        const reponse = await Http.post('/login', user);
+        const response = await Http.post('/login', user);
         this.setDefaultHeaders(response.data.token);
 
         return response;
@@ -14,7 +14,7 @@ class Auth {
 
     async logout() {
         return new Promise(resolve => {
-            baseService.defaults.headers.common['Authorization'] = '';
+            Http.defaults.headers.common['Authorization'] = '';
             localStorage.removeItem('token');
 
             resolve();
@@ -22,7 +22,7 @@ class Auth {
     }
 
     async getUser(id) {
-        const response = await baseService.get(`/getUser/${id}`);
+        const response = await Http.get(`/getUser/${id}`);
 
         return response;
     }
@@ -33,7 +33,7 @@ class Auth {
         }
 
         localStorage.setItem('token', token);
-        baseService.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        Http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
 }
 

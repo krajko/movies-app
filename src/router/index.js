@@ -25,6 +25,11 @@ const routes = [
     path: '/add',
     name: 'add',
     component: () => import('../components/AddMovie.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../components/Login.vue')
   }
 
 ]

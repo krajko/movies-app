@@ -28,6 +28,7 @@ import Movies from '../services/Movies';
 
 export default {
     name: 'movie-list',
+    
     data() {
         return {
             movies: [],

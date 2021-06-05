@@ -27,6 +27,7 @@ import Movies from '../services/Movies'
 
 export default {
     name: 'add-movie',
+    
     data() {
         return {
             title: null,
@@ -71,9 +72,5 @@ export default {
 </script>
 
 <style>
-
-.form-control {
-    margin-bottom: 1rem;
-}
 
 </style>
