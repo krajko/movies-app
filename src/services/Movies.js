@@ -1,6 +1,7 @@
-import { Http } from './Http';
+import Http from './Http';
 
-export default class Movies {
+class Movies {
+    
     async getAll(query = null) {
         if (query) {
             const { data } = await Http.get(`/movies?title=${query}`);
@@ -37,3 +38,5 @@ export default class Movies {
         return response;
     }
 }
+
+export default new Movies();
