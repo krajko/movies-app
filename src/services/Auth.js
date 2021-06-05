@@ -12,13 +12,9 @@ class Auth {
         return response;
     }
 
-    async logout() {
-        return new Promise(resolve => {
-            Http.defaults.headers.common['Authorization'] = '';
-            localStorage.removeItem('token');
-
-            resolve();
-        });
+    logout() {
+        Http.defaults.headers.common['Authorization'] = '';
+        localStorage.removeItem('token');
     }
 
     async getUser(id) {

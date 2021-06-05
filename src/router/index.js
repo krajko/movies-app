@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import globalAuthGuard from '../guards/auth'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -19,16 +21,19 @@ const routes = [
   {
     path: '/movies',
     name: 'movies',
+    meta: { authRequired: true },
     component: () => import('../components/MovieList.vue')
   },
   {
     path: '/add',
     name: 'add',
+    meta: { authRequired: true },
     component: () => import('../components/AddMovie.vue')
   },
   {
     path: '/login',
     name: 'login',
+    meta: { guestRequired: true },
     component: () => import('../components/Login.vue')
   }
 
@@ -39,5 +44,7 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach(globalAuthGuard);
 
 export default router
