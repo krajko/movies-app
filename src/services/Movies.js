@@ -21,9 +21,9 @@ class Movies {
     }
     
     async add(movie) {
-        const { data } = await Http.post('/movies', movie);
+        const response = await Http.post('/movies', movie);
 
-        return data;
+        return response;
     }
 
     async edit(id) {
