@@ -5,20 +5,20 @@
         </div>
 
         <div class="d-flex flex-row flex-wrap justify-content-center">
-            <div v-for="movie in movies" :key="movie.id" class="card col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3 text-start m-3 p-0">
+
+            <router-link :to="`/movies/${movie.id}`" v-for="movie in movies" :key="movie.id" class="card col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3 text-start m-3 p-0">                    
                 <img :src="movie.imageUrl" class="card-img-top" alt="Movie poster">
 
-                <div class="card-body d-flex flex-row justify-content-start align-items-center pb-0">
+                <div class="card-body d-flex align-items-center pb-0">
                     <h4 class="card-title"><strong>{{ movie.title }} ({{ movie.releaseDate | getYear }})</strong></h4> 
                 </div>
 
-                <hr class="mt-0 mb-0 mx-3">
-
-                <div class="card-footer bg-white border-0 d-flex flex-row justify-content-between align-items-center my-2">
+                <div class="card-footer d-flex justify-content-between py-3">
                     <small>{{ movie.director}}</small>
                     <small>Genre: <span class="text-primary">{{ movie.genre }}</span></small>
                 </div>
-            </div>  
+            </router-link>
+
         </div>
     </div>
 </template>

@@ -25,6 +25,12 @@ const routes = [
     component: () => import('../components/MovieList.vue')
   },
   {
+    path: '/movies/:id',
+    name: 'movie',
+    meta: { authRequired: true },
+    component: () => import('../components/Movie.vue')
+  },
+  {
     path: '/add',
     name: 'add',
     meta: { authRequired: true },
