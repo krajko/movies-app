@@ -17,12 +17,6 @@ class Auth {
         localStorage.removeItem('token');
     }
 
-    async getUser(id) {
-        const response = await Http.get(`/getUser/${id}`);
-
-        return response;
-    }
-
     setDefaultHeaders(token) {
         if (!token) {
             return;

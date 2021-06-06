@@ -54,7 +54,7 @@ export default {
                     imageUrl: this.imageUrl ?? this.defaultImg
                 });
                 this.$router.push('/movies');
-            } catch (e) {
+            } catch(e) {
                 this.errors = e.response.data.errors;
             }
         },

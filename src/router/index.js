@@ -31,6 +31,12 @@ const routes = [
     component: () => import('../components/AddMovie.vue')
   },
   {
+    path: '/register',
+    name: 'register',
+    meta: { guestRequired: true },
+    component: () => import('../components/Register.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: { guestRequired: true },
