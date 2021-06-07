@@ -32,11 +32,7 @@ div {
  #nav {
    box-shadow: 0 10px 15px rgba(1, 13, 34, 0.075);
  }
-
-h2 {
-  font-family: Ubuntu, sans-serif;
-}
-
+ 
 a {
 
   &.router-link-exact-active {

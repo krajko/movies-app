@@ -1,8 +1,8 @@
 <template>
   <div>
       <b-form v-on:submit.prevent="submit" class="text-center mx-auto mt-5" style="max-width: 280px;">
-          <b-form-input v-model="user.email" type="email" placeholder="Email"/>
-          <b-form-input v-model="user.password" type="password" placeholder="Password"/>
+          <b-form-input v-model="credentials.email" type="email" placeholder="Email"/>
+          <b-form-input v-model="credentials.password" type="password" placeholder="Password"/>
 
           <b-button variant="primary" type="submit" class="m-2 px-3">Login</b-button>
 
@@ -21,7 +21,7 @@ export default {
 
   data() {
     return {
-      user: {},
+      credentials: {},
       error: ''
     }
   },
@@ -29,7 +29,7 @@ export default {
   methods: {
     async submit() {
       try {
-        await Auth.login(this.user);
+        await Auth.login(this.credentials);
         this.$router.push('/');
       } catch(e) {
         if (e.response.status === 401) {

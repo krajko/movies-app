@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Users from '../services/Users'
+import Auth from '../services/Auth'
 
 export default {
     name: 'register',
@@ -38,7 +38,7 @@ export default {
     methods: {
         async register() {
             try {
-                await Users.register(this.user);
+                await Auth.register(this.user);
                 this.$router.push('/login');
             } catch(e) {
                 this.errors = e.response.data.errors;

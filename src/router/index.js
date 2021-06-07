@@ -47,6 +47,12 @@ const routes = [
     name: 'login',
     meta: { guestRequired: true },
     component: () => import('../components/Login.vue')
+  },
+  {
+    path: '/user',
+    name: 'user',
+    meta: { authRequired: true },
+    component: () => import('../components/User.vue')
   }
 
 ]
