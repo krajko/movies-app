@@ -1,5 +1,10 @@
 <template>
     <div>
+        <b-form v-on:submit.prevent="getAll" class="d-flex flex-row mx-auto mt-4 justify-content-around" style="max-width: 400px">
+            <b-input v-model="query" class="my-0 me-2" placeholder="Search"/>
+            <b-button variant="primary" class="px-3 my-0" type="submit"><b-icon-search></b-icon-search></b-button>
+        </b-form>
+        
         <div class="text-center mt-4">
             <b-spinner variant="primary" v-if="isLoading" class="mt-5"></b-spinner>
         </div>
@@ -32,6 +37,7 @@ export default {
     data() {
         return {
             movies: [],
+            query: '',
             isLoading: true
         }
     },
@@ -42,8 +48,11 @@ export default {
 
     methods: {
         async getAll() {
+            this.movies = [];
+            this.isLoading = true;
+
             try {
-                this.movies = await Movies.getAll();
+                this.movies = await Movies.getAll(this.query);
             } catch(e) {
                 console.log(e);
             } finally {

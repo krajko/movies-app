@@ -5,7 +5,7 @@ class Movies {
     async getAll(query = null) {
         if (query) {
             const { data } = await Http.get(`/movies?title=${query}`);
-
+            
             return data;
         }
         
