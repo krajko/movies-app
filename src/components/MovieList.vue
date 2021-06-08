@@ -1,8 +1,8 @@
 <template>
     <div>
         <b-form v-on:submit.prevent="getAll" class="d-flex flex-row mx-auto mt-4 justify-content-around" style="max-width: 400px">
-            <b-input v-model="query" class="my-0 me-2" placeholder="Search"/>
-            <b-button variant="primary" class="px-3 my-0" type="submit"><b-icon-search></b-icon-search></b-button>
+            <b-input v-model="query" class="col my-0 me-2" placeholder="Search"/>
+            <b-button variant="primary" class="col-2" type="submit"><b-icon-search font-scale="1.3"/></b-button>
         </b-form>
         
         <div class="text-center mt-4">

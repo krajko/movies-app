@@ -1,8 +1,8 @@
 <template>
-  <div id="nav" class="bg-white d-flex flex-row justify-content-between align-items-end text-center py-3">
+  <div id="nav" class="bg-white d-flex flex-row justify-content-around align-items-end py-3">
 
-      <div class="col-3 col-sm-4 text-primary d-flex">
-        <h2 class="col-7 m-0 ms-1 p-0"><strong>Movies</strong></h2>
+      <div class="col-4 d-flex text-primary">
+        <h2 class="m-0 ms-1 p-0"><strong><b-icon-film/> Movies</strong></h2>
       </div>
 
       <div v-if="!isAuth" class="col col-sm-2 d-flex">
@@ -10,7 +10,7 @@
         <router-link to="/register" class="p col m-0">Register</router-link>
       </div>
 
-      <div v-if="isAuth" class="col col-sm-2 d-flex">
+      <div v-if="isAuth" class="col col-sm-2 d-flex justify-content-center align-items-end text-center">
         <router-link to="/movies" class="col"> 
           <h5 class="m-0"><strong>All</strong></h5> 
         </router-link>
@@ -19,9 +19,12 @@
         </router-link>
       </div>
 
-      <div v-if="isAuth" class="col col-sm-4 d-flex align-items-end">
-        <router-link :to="`/user`" class="col text-end"> {{ user }} </router-link>
-        <button @click="logout" to="/add" class="btn col m-0 p-0">Logout</button>
+      <div v-if="isAuth" class="col col-sm-4 d-flex">
+        <router-link :to="`/user`" class="col d-flex justify-content-end my-auto">
+          <b-icon-person-circle font-scale="1.25" class="ms-2 mb-1 me-3 me-sm-2"/> 
+          <p class="d-none d-xl-block m-0">{{ user }}</p> 
+        </router-link>
+        <button @click="logout" class="btn col col-lg-3 mx-0 p-0">Logout</button>
       </div>
 
     </div>

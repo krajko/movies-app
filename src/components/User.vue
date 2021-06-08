@@ -1,6 +1,9 @@
 <template>
     <div class="d-flex justify-content-center mt-5">
-        <div class="text-start">
+        <div v-if="isLoading">
+            <b-spinner variant="primary"></b-spinner>
+        </div>
+        <div v-else class="text-start">
             <h1> <strong>{{ user.name }}</strong> </h1>
                 <p class="mb-1">Email: <strong>{{ user.email }}</strong></p>
                 <p>Registered: <strong>{{ user.created_at | formatDate }}</strong></p>
@@ -16,7 +19,8 @@ export default {
 
     data() {
         return {
-            user: {}
+            user: {},
+            isLoading: true
         }
     },
 
@@ -26,6 +30,8 @@ export default {
                 vm.user = await Auth.getUser();
             } catch(e) {
                 console.log(e);
+            } finally {
+                vm.isLoading = false;
             }
         })
     },
