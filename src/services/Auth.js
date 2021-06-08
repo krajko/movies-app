@@ -1,6 +1,6 @@
 import Http from './Http';
 
-class Auth {
+class AuthService {
     constructor() {
         this.setDefaultHeaders(localStorage.getItem('token'));
         this.setDefaultHeaders(localStorage.getItem('name'));
@@ -43,4 +43,5 @@ class Auth {
     }
 }
 
-export default new Auth();
+const Auth = new AuthService();
+export default Auth;

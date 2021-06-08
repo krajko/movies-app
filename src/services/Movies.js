@@ -1,6 +1,6 @@
 import Http from './Http';
 
-class Movies {
+class MoviesService {
     
     async getAll(query = null) {
         if (query) {
@@ -39,4 +39,5 @@ class Movies {
     }
 }
 
-export default new Movies();
+const Movies = new MoviesService();
+export default Movies;
