@@ -5,7 +5,6 @@ export default {
     async login(store, credentials) {
         const { user, token } = await authService.login(credentials);
         localStorage.setItem('token', token);
-        localStorage.setItem('user', user.name);
 
         store.commit('setLoggedIn', user);
         store.commit('setToken', token);
@@ -17,7 +16,6 @@ export default {
         store.commit('setToken', null);
         store.commit('setLoggedIn', {});
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
     },
 
     async getLoggedIn(store) {

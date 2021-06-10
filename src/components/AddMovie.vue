@@ -3,7 +3,7 @@
         <b-form v-on:submit.prevent="submit" class="text-center mx-auto mt-5" style="max-width: 380px;">
             <b-input v-model="title" type="text" placeholder="Title"/>
             <b-input v-model="director" type="text" placeholder="Director"/>
-            <b-input v-model="genre" class="col" type="text" placeholder="Genre"/>
+            <b-input v-model="genre" type="text" placeholder="Genre"/>
             <div class="d-flex flex-row">
                 <b-input v-model="releaseDate" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="col me-3" placeholder="Release date"/>
                 <b-input v-model="duration" type="text" onfocus="(this.type='number')" onblur="(this.type='text')" class="col" placeholder="Duration"/>

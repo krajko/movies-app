@@ -16,7 +16,7 @@
                 :key="movie.id" 
                 :movie="movie" 
                 @click.native="navigate(movie.id)"
-                class="movie-card"
+                class="pointer"
             />
         </div>
     </div>
@@ -60,11 +60,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-.movie-card:hover {
-    cursor: pointer;
-}
-
-</style>

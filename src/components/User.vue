@@ -10,15 +10,15 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import store from '../store';
+// import store from '../store';
 
 export default {
     name: 'user',
 
-    async beforeRouteEnter(to, from, next) {
-        await store.dispatch('getLoggedIn');
-        next();
-    },
+    // async beforeRouteEnter(to, from, next) {
+    //     await store.dispatch('getLoggedIn');
+    //     next();
+    // },
 
     computed: {
         ...mapGetters(['loggedIn'])

@@ -19,12 +19,12 @@
         </router-link>
       </div>
 
-      <div v-if="isAuth" class="col col-sm-4 d-flex">
-        <router-link @click="handleLogout" :to="`/user`" class="col d-flex justify-content-end my-auto">
+      <div v-if="isAuth" class="col col-sm-4 d-flex justify-content-end">
+        <router-link :to="`/user`" class="d-flex justify-content-end my-auto">
           <b-icon-person-circle font-scale="1.25" class="ms-2 mb-1 me-3 me-sm-2"/> 
           <p class="d-none d-xl-block m-0">{{ username }}</p> 
         </router-link>
-        <button @click="handleLogout" class="btn col col-lg-3 mx-0 p-0">Logout</button>
+        <a @click="handleLogout" class="pointer ms-5">Logout</a>
       </div>
 
     </div>
@@ -32,6 +32,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import store from '../store';
 
 export default {
     name: 'navbar',
@@ -45,11 +46,15 @@ export default {
       }
     },
 
+    async created() {
+      await store.dispatch('getLoggedIn');
+    },
+
     computed: {
       ...mapGetters(['isAuth', 'loggedIn']),
 
       username() {
-        return localStorage.getItem('user');
+        return this.loggedIn.name;
       }
     }
 }

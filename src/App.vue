@@ -51,4 +51,8 @@ a {
     margin-bottom: 1rem;
 }
 
+.pointer:hover {
+  cursor: pointer;
+}
+
 </style>
