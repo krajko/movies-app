@@ -20,44 +20,36 @@
       </div>
 
       <div v-if="isAuth" class="col col-sm-4 d-flex">
-        <router-link :to="`/user`" class="col d-flex justify-content-end my-auto">
+        <router-link @click="handleLogout" :to="`/user`" class="col d-flex justify-content-end my-auto">
           <b-icon-person-circle font-scale="1.25" class="ms-2 mb-1 me-3 me-sm-2"/> 
-          <p class="d-none d-xl-block m-0">{{ user }}</p> 
+          <p class="d-none d-xl-block m-0">{{ username }}</p> 
         </router-link>
-        <button @click="logout" class="btn col col-lg-3 mx-0 p-0">Logout</button>
+        <button @click="handleLogout" class="btn col col-lg-3 mx-0 p-0">Logout</button>
       </div>
 
     </div>
 </template>
 
 <script>
-import Auth from '../services/Auth'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'navbar',
 
-    data() {
-        return {
-          isAuth: false
-        }
-    },
-
     methods: {
-      logout() {
-          Auth.logout();
-          this.isAuth = false;
-          this.$router.push('/login');
+      ...mapActions(['logout']),
+
+      async handleLogout() {
+        await this.logout();
+        this.$router.push('/login');
       }
     },
-      
-    watch: {
-      $route() {
-        if (localStorage.token) {
-          this.isAuth = true;
-          this.user = localStorage.getItem('user');
-        } else {
-          this.isAuth = false;
-        }
+
+    computed: {
+      ...mapGetters(['isAuth', 'loggedIn']),
+
+      username() {
+        return localStorage.getItem('user');
       }
     }
 }

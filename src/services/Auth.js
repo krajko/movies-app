@@ -1,47 +1,26 @@
-import Http from './Http';
+import HttpService from './Http';
 
-class AuthService {
-    constructor() {
-        this.setDefaultHeaders(localStorage.getItem('token'));
-        this.setDefaultHeaders(localStorage.getItem('name'));
-    }
+class AuthService extends HttpService {
 
     async register(user) {
-        const response = await Http.post('/register', user);
-
-        return response;
+        const { data } = await this.http.post('/register', user);
+        return { data };
     }
 
-    async login(user) {
-        const response = await Http.post('/login', user);
-        this.setDefaultHeaders(response.data.token, response.data.name);
-        
-        return response;
-    }
-
-    async getUser() {
-        const token = localStorage.getItem('token');
-        const { data } = await Http.get(`/user/${token}`);
-
+    async login(credentials) {
+        const { data } = await this.http.post('/login', credentials);
         return data;
     }
-    
-    logout() {
-        Http.defaults.headers.common['Authorization'] = '';
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+
+    async getMyProfile() {
+        const { data } = await this.http.get(`/me`);
+        return data;
     }
-    
-    setDefaultHeaders(token, name) {
-        if (!token || !name) {
-            return;
-        }
-        
-        localStorage.setItem('token', token);
-        localStorage.setItem('user', name)
-        Http.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    logout() {
+        return this.http.post('/logout');
     }
 }
 
-const Auth = new AuthService();
-export default Auth;
+const authService = new AuthService();
+export default authService;

@@ -6,43 +6,40 @@
 
           <b-button variant="primary" type="submit" class="m-2 px-3">Login</b-button>
 
-          <div v-if="error" class="list-unstyled text-primary text-center mt-3">
-              <p class="my-1"> {{ error }} </p>
+          <div v-if="failed" class="list-unstyled text-primary text-center mt-3">
+              <p class="my-1"> Invalid credentials. </p>
           </div>
       </b-form>
   </div>
 </template>
 
 <script>
-import Auth from '../services/Auth'
+import { mapActions } from 'vuex';
 
 export default {
   name: 'login',
 
   data() {
     return {
-      credentials: {},
-      error: ''
+      credentials: {
+        email: '',
+        password: ''
+      },
+      failed: false
     }
   },
 
   methods: {
+    ...mapActions(['login']),
+
     async submit() {
       try {
-        await Auth.login(this.credentials);
+        await this.login(this.credentials);
         this.$router.push('/');
-      } catch(e) {
-        if (e.response.status === 401) {
-          this.error = "Invalid credentials.";
-        } else {
-          this.error = "Server error.";
-        }
+      } catch {
+        this.failed = true;
       }
     }
   }
 }
 </script>
-
-<style>
-
-</style>

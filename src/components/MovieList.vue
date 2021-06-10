@@ -1,17 +1,12 @@
 <template>
     <div>
-        <b-form v-on:submit.prevent="getAll" class="d-flex flex-row mx-auto mt-4 justify-content-around" style="max-width: 400px">
-            <b-input v-model="query" class="col my-0 me-2" placeholder="Search"/>
-            <b-button variant="primary" class="col-2" type="submit"><b-icon-search font-scale="1.3"/></b-button>
-        </b-form>
-        
-        <div class="text-center mt-4">
-            <b-spinner variant="primary" v-if="isLoading" class="mt-5"></b-spinner>
-        </div>
+        <b-form-input v-model="query" autocomplete="off" class="col rounded-pill mx-auto mt-4 mb-3 px-3" placeholder="Start typing to filter..." style="width: 300px"/>
 
         <div class="d-flex flex-row flex-wrap justify-content-center">
 
-            <router-link :to="`/movies/${movie.id}`" v-for="movie in movies" :key="movie.id" class="card col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3 text-start m-3 p-0">                    
+            <p v-if="movies.length === 0 && query">No movie title matches the search term.</p>
+
+            <router-link :to="`/movies/${movie.id}`" v-for="movie in filteredMovies" :key="movie.id" class="card col-10 col-sm-8 col-md-5 col-lg-4 col-xl-3 text-start m-3 p-0">                    
                 <img :src="movie.imageUrl" class="card-img-top" alt="Movie poster">
 
                 <div class="card-body d-flex align-items-center pb-0">
@@ -29,35 +24,28 @@
 </template>
 
 <script>
-import Movies from '../services/Movies';
+import { mapGetters } from 'vuex';
+import store from '../store';
 
 export default {
     name: 'movie-list',
     
     data() {
         return {
-            movies: [],
-            query: '',
-            isLoading: true
+            query: ''
         }
     },
 
-    created() {
-        this.getAll();
+    async beforeRouteEnter(to, from, next) {
+        await store.dispatch('getMovies');
+        next();
     },
 
-    methods: {
-        async getAll() {
-            this.movies = [];
-            this.isLoading = true;
+    computed: {
+        ...mapGetters(['movies']),
 
-            try {
-                this.movies = await Movies.getAll(this.query);
-            } catch(e) {
-                console.log(e);
-            } finally {
-                this.isLoading = false;
-            }
+        filteredMovies() {
+            return this.movies.filter(m => m.title.toLowerCase().includes(this.query.toLowerCase()));
         }
     },
 
@@ -69,7 +57,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

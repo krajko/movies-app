@@ -9,7 +9,7 @@
           <b-button variant="primary" class="m-2 px-3" type="submit">Register</b-button>
 
           <ul v-if="this.errors" class="list-unstyled text-primary text-center mt-3">
-            <li v-for="error in errors" :key="error">
+            <li v-for="error in errors" :key="error.msg">
                 <p v-for="msg in error" :key="msg" class="my-1">{{ msg }}</p>
             </li>
         </ul>

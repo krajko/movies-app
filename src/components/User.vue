@@ -1,39 +1,27 @@
 <template>
     <div class="d-flex justify-content-center mt-5">
-        <div v-if="isLoading">
-            <b-spinner variant="primary"></b-spinner>
-        </div>
-        <div v-else class="text-start">
-            <h1> <strong>{{ user.name }}</strong> </h1>
-                <p class="mb-1">Email: <strong>{{ user.email }}</strong></p>
-                <p>Registered: <strong>{{ user.created_at | formatDate }}</strong></p>
+        <div class="text-start">
+            <h1> <strong>{{ loggedIn.name }}</strong> </h1>
+                <p class="mb-1">Email: <strong>{{ loggedIn.email }}</strong></p>
+                <p>Registered: <strong>{{ loggedIn.created_at | formatDate }}</strong></p>
         </div>
     </div>
 </template>
 
 <script>
-import Auth from '../services/Auth'
+import { mapGetters } from 'vuex';
+import store from '../store';
 
 export default {
     name: 'user',
 
-    data() {
-        return {
-            user: {},
-            isLoading: true
-        }
+    async beforeRouteEnter(to, from, next) {
+        await store.dispatch('getLoggedIn');
+        next();
     },
 
-    beforeRouteEnter(to, from, next) {
-        next(async vm => {
-            try {
-                vm.user = await Auth.getUser();
-            } catch(e) {
-                console.log(e);
-            } finally {
-                vm.isLoading = false;
-            }
-        })
+    computed: {
+        ...mapGetters(['loggedIn'])
     },
 
     filters: {

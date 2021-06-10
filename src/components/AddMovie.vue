@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Movies from '../services/Movies'
+import store from '../store'
 
 export default {
     name: 'add-movie',
@@ -45,7 +45,7 @@ export default {
     methods: {
         async submit() {
             try {
-                await Movies.add({
+                await store.dispatch('addMovie', {
                     title: this.title,
                     director: this.director,
                     genre: this.genre,

@@ -1,16 +1,25 @@
 <template>
   <div class="container-fluid p-0">
     <navbar></navbar>
-    <router-view/>
+
+    <div v-if="isLoading" class="text-center">
+      <b-spinner variant="primary" class="mt-5"/>
+    </div>
+    <router-view v-else/>
   </div>
 </template>
 
 <script>
 import Navbar from './components/Navbar.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     'navbar': Navbar
+  },
+
+  computed: {
+    ...mapGetters(['isLoading'])
   }
 }
 </script>
@@ -18,15 +27,13 @@ export default {
 
 <style lang="scss">
 #app {
-  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
-  /* font-family: Ubuntu; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
 
 div {
-  font-family: Helvetica, sans-serif;
+  font-family: Helvetica, Avenir, sans-serif;
 }
 
  #nav {

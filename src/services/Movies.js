@@ -1,43 +1,32 @@
-import Http from './Http';
+import HttpService from './Http';
 
-class MoviesService {
+class MovieService extends HttpService{
     
-    async getAll(query = null) {
-        if (query) {
-            const { data } = await Http.get(`/movies?title=${query}`);
-            
-            return data;
-        }
-        
-        const { data } = await Http.get(`/movies`);
-
+    async getAll() {
+        const { data } = await this.http.get(`/movies`);
         return data;
     }
     
     async get(id) {
-        const { data } = await Http.get(`/movies/${id}`);
-
+        const { data } = await this.http.get(`/movies/${id}`);
         return data;
     }
     
     async add(movie) {
-        const response = await Http.post('/movies', movie);
-
-        return response;
+        const { data } = await this.http.post('/movies', movie);
+        return data;
     }
 
     async edit(id) {
-        const response = await Http.patch(`/movies/${id}`);
-
-        return response;
+        const { data } = await this.http.patch(`/movies/${id}`);
+        return data;
     }
 
     async delete(id) {
-        const response = await Http.delete(`/movies/${id}`);
-
-        return response;
+        const { data } = await this.http.delete(`/movies/${id}`);
+        return data;
     }
 }
 
-const Movies = new MoviesService();
-export default Movies;
+const movieService = new MovieService();
+export default movieService;
