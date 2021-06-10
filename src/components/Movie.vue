@@ -33,6 +33,7 @@ export default {
 
     data() {
         return {
+            isLoading: true,
             movie: {}
         }
     },
@@ -43,6 +44,8 @@ export default {
                 vm.movie = await Movies.get(to.params.id);
             } catch(e) {
                 console.log(e);
+            } finally {
+                vm.isLoading = false;
             }
         })
     },

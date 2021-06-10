@@ -2,7 +2,7 @@
   <div class="container-fluid p-0">
     <navbar></navbar>
 
-    <div v-if="isLoading" class="text-center">
+    <div v-if="isLoading" class="text-center mt-5">
       <b-spinner variant="primary" class="mt-5"/>
     </div>
     <router-view v-else/>
