@@ -36,8 +36,9 @@ export default {
       try {
         await this.login(this.credentials);
         this.$router.push('/');
-      } catch {
+      } catch(e) {
         this.failed = true;
+        console.log(e);
       }
     }
   }

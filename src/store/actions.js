@@ -20,24 +20,18 @@ export default {
 
     async getLoggedIn(store) {
         if (store.getters.isAuth) {
-            store.commit('setIsLoading', true);
             
             const loggedIn = await authService.getMyProfile();
             store.commit('setLoggedIn', loggedIn);
 
-            store.commit('setIsLoading', false);
         } else {
             store.commit('setLoggedIn', {});
         }
     },
 
     async getMovies(store) {
-        store.commit('setIsLoading', true);
-
         const movies = await movieService.getAll();
         store.commit('setMovies', movies);
-
-        store.commit('setIsLoading', false);
     },
 
     async addMovie(store, movieData) {

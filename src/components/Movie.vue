@@ -1,10 +1,7 @@
 <template>
     <div class="d-flex flex-row justify-content-center align-items-center mx-auto" style="max-width: 800px;">
-        <div v-if="isLoading" class="mt-5">
-            <b-spinner variant="primary" class="mt-5"/>
-        </div>
 
-        <div v-else class="d-flex flex-column flex-md-row align-items-between mt-5">
+        <div class="d-flex flex-column flex-md-row align-items-between mt-5">
             <img class="col-10 col-md-6 border rounded mx-auto" :src="movie.imageUrl" alt="Movie post" style="height: 100%"> 
 
             <div class="col-10 col-md-6 d-flex flex-column justify-content-center mx-auto py-4 py-md-0 px-4" style="height: 100%">
@@ -26,34 +23,20 @@
 </template>
 
 <script>
-import Movies from '../services/Movies'
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'movie',
 
-    data() {
-        return {
-            isLoading: true,
-            movie: {}
-        }
-    },
+    computed: {
+        ...mapGetters(['movies', 'isLoading']),
 
-    beforeRouteEnter(to, from, next) {
-        next(async vm => {
-            try {
-                vm.movie = await Movies.get(to.params.id);
-            } catch(e) {
-                console.log(e);
-            } finally {
-                vm.isLoading = false;
-            }
-        })
-    },
+        movie() {
+            return this.movies.find(m => m.id == this.id);
+        },
 
-    filters: {
-        formatDate(date) {
-            const newDate = new Date(date);
-            return newDate.toLocaleDateString('en-GB');
+        id() {
+            return this.$route.params.id;
         }
     }
 }

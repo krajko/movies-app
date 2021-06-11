@@ -1,6 +1,6 @@
 import HttpService from './Http';
 
-class MovieService extends HttpService{
+class MovieService extends HttpService {
     
     async getAll() {
         const { data } = await this.http.get(`/movies`);

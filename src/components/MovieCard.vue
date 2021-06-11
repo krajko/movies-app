@@ -8,7 +8,7 @@
 
         <div class="card-footer d-flex justify-content-between py-3">
             <small>{{ movie.director}}</small>
-            <small>Genre: <span class="text-primary">{{ movie.genre }}</span></small>
+            <small><strong>{{ movie.genre }}</strong></small>
         </div>                   
     </div>
 </template>
@@ -19,13 +19,14 @@ export default {
 
     props: {
         movie: Object
-    },
-
-    filters: {
-        getYear(date) {
-            const newDate = new Date(date);
-            return newDate.getFullYear();
-        }
     }
 }
 </script>
+
+<style scoped>
+
+.card:hover {
+    color: var(--bs-primary);
+}
+
+</style>

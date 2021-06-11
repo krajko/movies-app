@@ -10,6 +10,25 @@ Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
 Vue.config.productionTip = false
+
+Vue.mixin({
+  methods: {
+    navigate(id) {
+      this.$router.push(`/movies/${id}`);
+    }
+  },
+  filters: {
+    formatDate(date) {
+      const newDate = new Date(date);
+      return newDate.toLocaleDateString('en-GB');
+    },
+
+    getYear(date) {
+      const newDate = new Date(date);
+      return newDate.getFullYear();
+    }
+  }
+})
   
 new Vue({
   router,
